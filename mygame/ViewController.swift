@@ -20,8 +20,9 @@ class ViewController: UIViewController {
         
         if let skView: SKView = self.view as? SKView {
 //            scene = myScene(size: skView.frame.size)
-
-            scene = gameScene(size: CGSize(width: 2048, height: 1536))
+//            scene = gameScene(size: CGSize(width: 2048, height: 1536))
+            
+            scene = ZombieScene(size: CGSize(width: 2048, height: 1536))
             scene?.scaleMode = .aspectFill
             skView.presentScene(scene)
             skView.showsFPS = true
