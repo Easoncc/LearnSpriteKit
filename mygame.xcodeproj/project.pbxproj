@@ -16,6 +16,7 @@
 		42C61CD321E72722001A7FFD /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 42C61CD221E72722001A7FFD /* Actions.sks */; };
 		42C61CD521E73EF8001A7FFD /* gameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C61CD421E73EF8001A7FFD /* gameScene.swift */; };
 		42C61CD721EC9293001A7FFD /* ZombieScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C61CD621EC9293001A7FFD /* ZombieScene.swift */; };
+		42C61CD921EDC834001A7FFD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C61CD821EDC834001A7FFD /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		42C61CD221E72722001A7FFD /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		42C61CD421E73EF8001A7FFD /* gameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gameScene.swift; sourceTree = "<group>"; };
 		42C61CD621EC9293001A7FFD /* ZombieScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZombieScene.swift; sourceTree = "<group>"; };
+		42C61CD821EDC834001A7FFD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				42C61CD421E73EF8001A7FFD /* gameScene.swift */,
 				42C61CD621EC9293001A7FFD /* ZombieScene.swift */,
 				42C61CC021E71F80001A7FFD /* ViewController.swift */,
+				42C61CD821EDC834001A7FFD /* Utils.swift */,
 				42C61CC221E71F80001A7FFD /* Main.storyboard */,
 				42C61CC521E71F80001A7FFD /* Assets.xcassets */,
 				42C61CC721E71F80001A7FFD /* LaunchScreen.storyboard */,
@@ -153,6 +156,7 @@
 				42C61CD121E722EC001A7FFD /* myScene.swift in Sources */,
 				42C61CD521E73EF8001A7FFD /* gameScene.swift in Sources */,
 				42C61CBF21E71F80001A7FFD /* AppDelegate.swift in Sources */,
+				42C61CD921EDC834001A7FFD /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
