@@ -45,8 +45,40 @@ class ZombieScene: SKScene {
         addChild(zombie1)
         
         debugDrawPlayableArea()
+        
+        spawnEnemy()
     }
     
+    func spawnEnemy() {
+        let enemy = SKSpriteNode(imageNamed: "enemy")
+        enemy.position = CGPoint(x: size.width - enemy.size.width/2, y: size.height/2)
+        addChild(enemy)
+        
+        // 1
+        
+        let actionMidMove = SKAction.moveBy(x: -size.width/2-enemy.size.width/2, y: -playableRect.height/2 + enemy.size.height/2, duration: 1)
+        
+        // 2
+        let actionMove = SKAction.moveBy(
+            x: -size.width/2-enemy.size.width/2,
+            y: playableRect.height/2 - enemy.size.height/2,
+            duration: 1.0)
+        
+        let logMessage = SKAction.run {
+            print("Reached bottom!")
+        }
+        
+        let waitAction = SKAction.wait(forDuration: 2)
+        
+        let reverseMid = actionMidMove.reversed()
+        let reverseMove = actionMove.reversed()
+        
+        // 3
+        let sequence = SKAction.sequence([waitAction, actionMidMove, logMessage, waitAction, actionMove, reverseMove, logMessage, waitAction, reverseMid])
+        
+        // 4
+        enemy.run(SKAction.repeatForever(sequence))
+    }
     
     override func update(_ currentTime: TimeInterval) {
 //        zombie1.position = CGPoint(x: zombie1.position.x+8, y: zombie1.position.y)
