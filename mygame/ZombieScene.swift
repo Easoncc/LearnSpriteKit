@@ -11,6 +11,7 @@ import SpriteKit
 
 class ZombieScene: SKScene {
 
+    var lastTouchLocation: CGPoint?
     var zombie1: SKSpriteNode!
     var lastUpdateTime: TimeInterval = 0
     var dt: TimeInterval = 0
@@ -18,7 +19,11 @@ class ZombieScene: SKScene {
     var velocity = CGPoint.zero
     let playableRect: CGRect
     let zombieAnimation: SKAction!
-    
+    var catCollisionSound: SKAction = SKAction.playSoundFileNamed(
+        "hitCat.wav", waitForCompletion: false)
+    var enemyCollisionSound: SKAction = SKAction.playSoundFileNamed(
+        "hitCatLady.wav", waitForCompletion: false)
+
     override init(size: CGSize) {
         
         let maxAspectRatio = UIScreen.main.bounds.size.width/UIScreen.main.bounds.size.height
@@ -68,6 +73,8 @@ class ZombieScene: SKScene {
         run(SKAction.repeatForever(SKAction.sequence([SKAction.run { [weak self] in
             self?.spawnCat()
             }, SKAction.wait(forDuration: 1)])))
+        
+        run(SKAction.repeatForever(SKAction.playSoundFileNamed("backgroundMusic.mp3", waitForCompletion: true)))
     }
     
     func startZombieAnimation() {
@@ -128,10 +135,12 @@ class ZombieScene: SKScene {
     
     func zombieHit(cat: SKSpriteNode) {
         cat.removeFromParent()
+        run(catCollisionSound)
     }
     
     func zombieHit(enemy: SKSpriteNode) {
         enemy.removeFromParent()
+        run(enemyCollisionSound)
     }
     
     func checkCollisions() {
@@ -158,48 +167,31 @@ class ZombieScene: SKScene {
         }
     }
     
-    override func update(_ currentTime: TimeInterval) {
-//        zombie1.position = CGPoint(x: zombie1.position.x+8, y: zombie1.position.y)
-        
-        if lastUpdateTime > 0 {
-            dt = currentTime - lastUpdateTime
-        } else {
-            dt = 0
-        }
-        lastUpdateTime = currentTime
-        
-        move(sprite: zombie1, velocity: velocity)
-        rotate(sprite: zombie1, direction: velocity)
-        boundsCheckZombie()
-        checkCollisions()
-    }
-    
     func move(sprite: SKSpriteNode, velocity: CGPoint) {
         let amountToMove = velocity * CGFloat(dt)
         sprite.position += amountToMove
-        //        print("Amount to move: \(amountToMove)")
     }
     
     func moveZombieToward(location: CGPoint) {
         
-        if zombie1.contains(location) {
-            velocity = CGPoint.zero
-            stopZombieAnimation()
-            return
-        }
-        
         let offset = location - zombie1.position
-        let length = offset.length()
-        let direction = offset / CGFloat(length)
+        let direction = offset.normalized()
         velocity = direction * zombieMovePointsPerSec
         startZombieAnimation()
     }
     
-    func rotate(sprite: SKSpriteNode, direction: CGPoint) {
-        sprite.zRotation = direction.angle
+//    func rotate(sprite: SKSpriteNode, direction: CGPoint) {
+//        sprite.zRotation = direction.angle
+//    }
+    
+    func rotate(sprite: SKSpriteNode, direction: CGPoint, rotateRadiansPerSec: CGFloat) {
+        let shortest = shortestAngleBetween(angle1: sprite.zRotation, angle2: velocity.angle)
+        let amountToRotate = min(rotateRadiansPerSec * CGFloat(dt), abs(shortest))
+        sprite.zRotation += shortest.sign() * amountToRotate
     }
     
     func sceneTouched(touchLocation:CGPoint) {
+        lastTouchLocation = touchLocation
         moveZombieToward(location: touchLocation)
     }
     
@@ -232,6 +224,38 @@ class ZombieScene: SKScene {
         shape.strokeColor = SKColor.red
         shape.lineWidth = 4.0
         addChild(shape)
+    }
+}
+
+extension ZombieScene {
+    
+    override func update(_ currentTime: TimeInterval) {
+        //        zombie1.position = CGPoint(x: zombie1.position.x+8, y: zombie1.position.y)
+        
+        if lastUpdateTime > 0 {
+            dt = currentTime - lastUpdateTime
+        } else {
+            dt = 0
+        }
+        lastUpdateTime = currentTime
+        
+        if let lastTouchLocation = lastTouchLocation {
+            let diff = lastTouchLocation - zombie1.position
+            if diff.length() <= zombieMovePointsPerSec * CGFloat(dt) {
+                zombie1.position = lastTouchLocation
+                velocity = CGPoint.zero
+                stopZombieAnimation()
+            } else {
+                move(sprite: zombie1, velocity: velocity)
+                rotate(sprite: zombie1, direction: velocity, rotateRadiansPerSec: 4.0 * π)
+            }
+        }
+        
+        boundsCheckZombie()
+    }
+    
+    override func didEvaluateActions() {
+        checkCollisions()
     }
 }
 
