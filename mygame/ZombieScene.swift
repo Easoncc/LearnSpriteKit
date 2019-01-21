@@ -135,12 +135,44 @@ class ZombieScene: SKScene {
     
     func zombieHit(cat: SKSpriteNode) {
         cat.removeFromParent()
+        cat.name = "cat"
+        cat.setScale(1.0)
+        
+        let turnGreen = SKAction.colorize(with: SKColor.green, colorBlendFactor: 1.0, duration: 0.2)
+        cat.run(turnGreen)
+        
+        
         run(catCollisionSound)
     }
     
     func zombieHit(enemy: SKSpriteNode) {
         enemy.removeFromParent()
         run(enemyCollisionSound)
+        
+        let actionIn = SKAction.fadeIn(withDuration: 0.2)
+        let actionOut = SKAction.fadeOut(withDuration: 0.2)
+        
+        zombie1.run(SKAction.repeat(SKAction.sequence([actionIn, actionOut, SKAction.wait(forDuration: 0.2)]), count: 3)) { [weak self] in
+            self?.zombie1.alpha = 1
+            self?.zombie1.isHidden = false
+        }
+        
+//        let blinkTimes = 10.0
+//        let duration = 3.0
+//        let blinkAction = SKAction.customAction(withDuration: duration) { node, elapsedTime in
+//            let slice = duration / blinkTimes
+//            let remainder = Double(elapsedTime).truncatingRemainder(
+//                dividingBy: slice)
+//            node.isHidden = remainder > slice / 2
+//
+//            print("slice:"+slice.description)
+//        }
+//
+//        let setHidden = SKAction.run() { [weak self] in
+//            self?.zombie1.isHidden = false
+//        }
+//        zombie1.run(SKAction.sequence([blinkAction, setHidden]))
+
     }
     
     func checkCollisions() {
