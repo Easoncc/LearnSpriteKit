@@ -30,6 +30,8 @@ class ZombieScene: SKScene {
     let cameraMovePointsPerSec: CGFloat = 200.0
     var cameraNode: SKCameraNode!
     let shape = SKShapeNode()
+    let livesLabel = SKLabelNode(fontNamed: "Glimstick")
+    let catCountLabel = SKLabelNode(fontNamed: "Glimstick")
     
     var cameraRect : CGRect {
         let x = cameraNode.position.x - size.width/2
@@ -104,6 +106,27 @@ class ZombieScene: SKScene {
         camera = cameraNode
         cameraNode.position = CGPoint(x: size.width/2, y: size.height/2)
         
+        livesLabel.text = "Lives: "+lives.description
+        livesLabel.fontColor = SKColor.black
+        livesLabel.fontSize = 100
+        livesLabel.zPosition = 150
+        livesLabel.horizontalAlignmentMode = .left
+        livesLabel.verticalAlignmentMode = .bottom
+        livesLabel.position = CGPoint(
+            x: -playableRect.size.width/2 + CGFloat(20),
+            y: -playableRect.size.height/2 + CGFloat(20))
+        cameraNode.addChild(livesLabel)
+        
+        catCountLabel.text = "Cats: "+trainCount.description
+        catCountLabel.fontColor = SKColor.black
+        catCountLabel.fontSize = 100
+        catCountLabel.zPosition = 150
+        catCountLabel.horizontalAlignmentMode = .right
+        catCountLabel.verticalAlignmentMode = .bottom
+        catCountLabel.position = CGPoint(
+            x: playableRect.size.width/2 - CGFloat(20),
+            y: -playableRect.size.height/2 + CGFloat(20))
+        cameraNode.addChild(catCountLabel)
     }
     
     func startZombieAnimation() {
@@ -166,6 +189,7 @@ class ZombieScene: SKScene {
     func zombieHit(cat: SKSpriteNode) {
         
         trainCount += 1
+        catCountLabel.text = "Cats: "+trainCount.description
         
         cat.removeAllActions()
         cat.name = "train"
@@ -182,7 +206,7 @@ class ZombieScene: SKScene {
         
         loseCats()
         lives -= 1
-        
+        livesLabel.text = "Lives: "+lives.description
         enemy.removeFromParent()
         run(enemyCollisionSound)
         
@@ -348,8 +372,10 @@ class ZombieScene: SKScene {
             // 4
             loseCount += 1
             if self.trainCount > 0 {
-               self.trainCount -= 1
+                self.trainCount -= 1
+                self.catCountLabel.text = "Cats: "+self.trainCount.description
             }
+            
             if loseCount >= 2 {
                 stop[0] = true
             }
