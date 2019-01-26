@@ -26,6 +26,9 @@
 		2A69D3A321FC253C0072AA22 /* win.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2A69D39E21FC253C0072AA22 /* win.mp3 */; };
 		2A69D3A421FC253C0072AA22 /* lose.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2A69D39F21FC253C0072AA22 /* lose.mp3 */; };
 		2A69D3A521FC253C0072AA22 /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2A69D3A021FC253C0072AA22 /* backgroundMusic.mp3 */; };
+		2A69D3CC21FC7E620072AA22 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2A69D3CA21FC7E620072AA22 /* Actions.sks */; };
+		2A69D3CD21FC7E620072AA22 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2A69D3CB21FC7E620072AA22 /* GameScene.sks */; };
+		2A69D3D021FC88640072AA22 /* Cat.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2A69D3CF21FC88640072AA22 /* Cat.sks */; };
 		42C61CBF21E71F80001A7FFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C61CBE21E71F80001A7FFD /* AppDelegate.swift */; };
 		42C61CC121E71F80001A7FFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42C61CC021E71F80001A7FFD /* ViewController.swift */; };
 		42C61CC421E71F80001A7FFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42C61CC221E71F80001A7FFD /* Main.storyboard */; };
@@ -60,6 +63,9 @@
 		2A69D39E21FC253C0072AA22 /* win.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win.mp3; sourceTree = "<group>"; };
 		2A69D39F21FC253C0072AA22 /* lose.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = lose.mp3; sourceTree = "<group>"; };
 		2A69D3A021FC253C0072AA22 /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
+		2A69D3CA21FC7E620072AA22 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		2A69D3CB21FC7E620072AA22 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		2A69D3CF21FC88640072AA22 /* Cat.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Cat.sks; sourceTree = "<group>"; };
 		42C61CBB21E71F80001A7FFD /* mygame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mygame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C61CBE21E71F80001A7FFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42C61CC021E71F80001A7FFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -108,8 +114,10 @@
 		2A69D38421FC24610072AA22 /* CatNap */ = {
 			isa = PBXGroup;
 			children = (
+				2A69D3CE21FC87E90072AA22 /* Scenes */,
 				2A69D39B21FC253C0072AA22 /* Sounds */,
 				2A69D38521FC24610072AA22 /* AppDelegate.swift */,
+				2A69D3CA21FC7E620072AA22 /* Actions.sks */,
 				2A69D38B21FC24610072AA22 /* GameScene.swift */,
 				2A69D38D21FC24610072AA22 /* GameViewController.swift */,
 				2A69D38F21FC24610072AA22 /* Main.storyboard */,
@@ -130,6 +138,15 @@
 				2A69D3A021FC253C0072AA22 /* backgroundMusic.mp3 */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		2A69D3CE21FC87E90072AA22 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				2A69D3CB21FC7E620072AA22 /* GameScene.sks */,
+				2A69D3CF21FC88640072AA22 /* Cat.sks */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		42C61CB221E71F80001A7FFD = {
@@ -251,13 +268,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A69D3A121FC253C0072AA22 /* mrreow.mp3 in Resources */,
+				2A69D3CC21FC7E620072AA22 /* Actions.sks in Resources */,
 				2A69D39121FC24610072AA22 /* Main.storyboard in Resources */,
 				2A69D3A521FC253C0072AA22 /* backgroundMusic.mp3 in Resources */,
 				2A69D39321FC24630072AA22 /* Assets.xcassets in Resources */,
 				2A69D3A321FC253C0072AA22 /* win.mp3 in Resources */,
+				2A69D3CD21FC7E620072AA22 /* GameScene.sks in Resources */,
 				2A69D3A421FC253C0072AA22 /* lose.mp3 in Resources */,
 				2A69D39621FC24630072AA22 /* LaunchScreen.storyboard in Resources */,
 				2A69D3A221FC253C0072AA22 /* pop.mp3 in Resources */,
+				2A69D3D021FC88640072AA22 /* Cat.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +371,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6AS4N82Q9E;
 				INFOPLIST_FILE = CatNap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -369,6 +390,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6AS4N82Q9E;
 				INFOPLIST_FILE = CatNap/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
