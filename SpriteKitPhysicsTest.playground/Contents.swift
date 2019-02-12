@@ -98,7 +98,7 @@ var windForce = CGVector(dx: 50, dy: 0)
 
 extension SKScene {
     //1
-    func applyWindForce() {
+    @objc func applyWindForce() {
         enumerateChildNodes(withName: "sand") { node, _ in
             node.physicsBody!.applyForce(windForce)
         }
@@ -108,7 +108,7 @@ extension SKScene {
     }
     
     //2
-    func switchWindDirection() {
+    @objc func switchWindDirection() {
         blowingRight = !blowingRight
         windForce = CGVector(dx: blowingRight ? 50 : -50, dy: 0)
     }
